@@ -28,12 +28,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/static/favicon-32x32.png" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.699604859476" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.699606552899" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.699604859476" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.699606552899" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.699604859476" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.699604859476" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.699606552899" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.699606552899" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -539,7 +539,7 @@ stored under the directory &#x27;log/netconf-messages&#x27; and named by the
 </ul>
 <p><strong>Example: - Sending NETCONF GET RPC and receiving response</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">11:10:15.038 TRACE org.opendaylight.netconf.logging.brokers.NetconfMessagesLoggingBroker - Session: 641 - Sending NETCONF message:
+<pre class="language-none"><code v-pre class="language-none">11:10:15.038 TRACE org.opendaylight.netconf.logging.brokers.NetconfMessagesLoggingBroker - b1b2b9c1: Sending NETCONF message:
 &lt;rpc xmlns=&quot;urn:ietf:params:xml:ns:netconf:base:1.0&quot; message-id=&quot;m-179&quot;&gt;
     &lt;get&gt;
         &lt;filter xmlns:ns0=&quot;urn:ietf:params:xml:ns:netconf:base:1.0&quot; ns0:type=&quot;subtree&quot;&gt;
@@ -548,7 +548,7 @@ stored under the directory &#x27;log/netconf-messages&#x27; and named by the
     &lt;/get&gt;
 &lt;/rpc&gt;
 
-11:10:15.055 TRACE org.opendaylight.netconf.logging.brokers.NetconfMessagesLoggingBroker - Session: 641 - Received NETCONF message:
+11:10:15.055 TRACE org.opendaylight.netconf.logging.brokers.NetconfMessagesLoggingBroker - b1b2b9c1: Received NETCONF message:
 &lt;rpc-reply xmlns=&quot;urn:ietf:params:xml:ns:netconf:base:1.0&quot; message-id=&quot;m-179&quot;&gt;
     &lt;data&gt;
         &lt;netconf xmlns=&quot;urn:ietf:params:xml:ns:netmod:notification&quot;&gt;
@@ -583,8 +583,7 @@ stored under the directory &#x27;log/netconf-messages&#x27; and named by the
             </svg>
         </div>
         <div class="pr-5 ml-3">
-<p>Number 641 represents the session ID. It is read from
-the NETCONF hello message. If multiple sessions are
+<p>String &#x27;b1b2b9c1&#x27; represents the session ID. If multiple sessions are
 created between the NETCONF server and NETCONF client and are
 logically grouped by the same node ID, then logs from multiple
 sessions are stored to the same logging file (this is needed to
