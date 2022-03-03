@@ -30,12 +30,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/static/favicon-32x32.png" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.696604636988" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.699604859476" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.696604636988" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.699604859476" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.696604636988" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.696604636988" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.699604859476" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.699604859476" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -252,7 +252,8 @@ fail at this step.</li>
 <li>Write configuration into device - Pushing calculated changes into
 device without committing of this changes.</li>
 <li>Validate configuration - Validation of written configuration from
-the view of constraints and consistency.</li>
+the view of constraints and consistency.
+This phase can be skipped with &quot;do-validate&quot; flag.</li>
 <li>Confirmed commit - It is used for locking of device configuration,
 so no other transaction can touch this device.</li>
 <li>Confirming commit (submit configuration) - Persisting all changes on
@@ -451,7 +452,7 @@ of the commit. One node has failed because failed validation (IOSXRN).</p>
                     &quot;node-id&quot;: &quot;IOSXRN&quot;,
                     &quot;configuration-status&quot;: &quot;fail&quot;,
                     &quot;error-message&quot;: &quot;RemoteDevice{IOSXRN}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;,
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
                     &quot;rollback-status&quot;: &quot;complete&quot;
                 },
                 {
@@ -472,7 +473,7 @@ of the commit. One node has failed because failed validation (IOSXRN).</p>
 </doc-anchor-target>
 <p>RPC commit input has 2 target nodes and the output describes the result
 of the commit. One node has failed because the confirmed commit failed
-(IOSXRN).</p>
+(IOSXRN). Validation phase was skipped due to false &quot;do-validate&quot; flag.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -480,6 +481,7 @@ of the commit. One node has failed because the confirmed commit failed
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
+        &quot;do-validate&quot; : False,
         &quot;target-nodes&quot;: {
             &quot;node&quot;: [&quot;IOSXR&quot;, &quot;IOSXRN&quot;]
         }
@@ -497,7 +499,7 @@ of the commit. One node has failed because the confirmed commit failed
                     &quot;node-id&quot;: &quot;IOSXRN&quot;,
                     &quot;configuration-status&quot;: &quot;fail&quot;,
                     &quot;error-message&quot;: &quot;RemoteDevice{IOSXRN}: Confirmed commit failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;,
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
                     &quot;rollback-status&quot;: &quot;complete&quot;
                 },
                 {
@@ -543,7 +545,7 @@ confirmed commit and the submitted configuration (IOSXRN).</p>
                     &quot;node-id&quot;: &quot;IOSXRN&quot;,
                     &quot;configuration-status&quot;: &quot;fail&quot;,
                     &quot;error-message&quot;: &quot;RemoteDevice{IOSXRN}: time delay between confirmed and confirming commit was greater than 300 seconds, the configured changes were rolled back.\n&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;,
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
                     &quot;rollback-status&quot;: &quot;complete&quot;
                 },
                 {
@@ -589,7 +591,7 @@ of the commit. One node has failed due to improper configuration
                     &quot;node-id&quot;: &quot;IOSXRN&quot;,
                     &quot;configuration-status&quot;: &quot;fail&quot;,
                     &quot;error-message&quot;: &quot;Supplied value \&quot;GigabitEthernet0/0/0/1ghjfhjfhjfghj\&quot; does not match required pattern \&quot;^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\&quot;\n&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;,
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
                     &quot;rollback-status&quot;: &quot;complete&quot;
                 },
                 {
@@ -641,12 +643,12 @@ been mounted yet (AAA).</p>
                 {
                     &quot;node-id&quot;: &quot;IOSXRN&quot;,
                     &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
                 },
                 {
                     &quot;node-id&quot;: &quot;IOSXR&quot;,
                     &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
                 }
             ]
         }
@@ -691,7 +693,7 @@ of the commit. One node has failed due to improper configuration
                     &quot;node-id&quot;: &quot;IOSXRN&quot;,
                     &quot;configuration-status&quot;: &quot;fail&quot;,
                     &quot;error-message&quot;: &quot;Illegal value for key: (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-name, in: (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-configuration[{(http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)active=act, (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-name=GigabitEthernet0/0/0/3}], actual value: GigabitEthernet0/0/0/3/ddd, expected value from key: GigabitEthernet0/0/0/3\n&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;,
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
                     &quot;rollback-status&quot;: &quot;complete&quot;
                 }
             ]
@@ -850,6 +852,5 @@ touched nodes, the request will result in an error.</p>
         <div id="docs-overlay-target"></div>
 
         <script>window.__DOCS__ = { "title": "RPC commit", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
-        <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="f4b74451-b2eb-4560-acd3-af512e0b29d1";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
     </body>
 </html>

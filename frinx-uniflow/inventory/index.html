@@ -30,12 +30,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/static/favicon-32x32.png" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.696604636988" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.699604859476" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.696604636988" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.699604859476" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.696604636988" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.696604636988" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.699604859476" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.699604859476" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -271,7 +271,6 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;node-id&quot;:&quot;ios1&quot;,
     &quot;cli&quot;:{
         &quot;cli-topology:host&quot;:&quot;192.168.1.25&quot;,
         &quot;cli-topology:port&quot;:&quot;22&quot;,
@@ -294,7 +293,6 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;node-id&quot;:&quot;xr1&quot;,
     &quot;netconf&quot;:{
         &quot;netconf-node-topology:host&quot;:&quot;10.0.0.1&quot;,
         &quot;netconf-node-topology:port&quot;:830,
@@ -328,7 +326,6 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;node-id&quot;:&quot;junos1&quot;,
     &quot;cli&quot;:{
         &quot;cli-topology:host&quot;:&quot;10.103.5.208&quot;,
         &quot;cli-topology:port&quot;:&quot;22&quot;,
@@ -350,7 +347,6 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;node-id&quot;:&quot;cal1&quot;,
     &quot;netconf&quot;:{
         &quot;netconf-node-topology:host&quot;:&quot;10.19.0.16&quot;,
         &quot;netconf-node-topology:port&quot;:830,
@@ -375,7 +371,6 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;node-id&quot;:&quot;nokia1&quot;,
     &quot;netconf&quot;:{
         &quot;netconf-node-topology:host&quot;:&quot;10.19.0.18&quot;,
         &quot;netconf-node-topology:port&quot;:2830,
@@ -406,7 +401,6 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;node-id&quot;:&quot;ciena1&quot;,
     &quot;cli&quot;:{
         &quot;cli-topology:host&quot;:&quot;localhost&quot;,
         &quot;cli-topology:port&quot;:&quot;51022&quot;,
@@ -498,6 +492,5 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
         <div id="docs-overlay-target"></div>
 
         <script>window.__DOCS__ = { "title": "Device Inventory", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
-        <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="f4b74451-b2eb-4560-acd3-af512e0b29d1";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
     </body>
 </html>
