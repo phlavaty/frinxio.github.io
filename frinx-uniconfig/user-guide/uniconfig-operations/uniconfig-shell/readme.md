@@ -471,7 +471,7 @@ aliases
 lbr      (alias for 'logging-status broker restconf')
 ```
 
-* After opening Show mode, a new UniConfif transaction is open. Transaction is closed after leaving this mode.
+* After opening Show mode, a new UniConfig transaction is open. Transaction is closed after leaving this mode.
 
 ```shell Opening Show operational mode
 uniconfig>show
@@ -579,7 +579,36 @@ Such operation must be executed using input JSON.
 !!!
 
 ## Pipe operations
+UniConfig shell supports pipe operations similar to unix pipes.
+When command is followed by pipe sign: |, output of command will be passed to selected pipe operation.
+- Example:
+```shell Execution of grep pipe operation:
+config>show uniconfig R1 interface-configurations interface-configuration | grep netmask
+
+    "netmask": "255.255.255.0"
+```
+
+Supported pipe operations are:
+1. grep - shows only lines that match supplied regex
+2. match - same as grep but can be used with optional parameters to show also lines before and after matched line
+3. context-match - same as grep but shows also parent structure
+4. brief - displays root elements in the short table format
 
 ## Redirection of output
+Result of command can be redirected to file using ">" sign followed by file name.
+- Example
+```shell Redirection of output to file
+config>show uniconfig R1 interface-configurations interface-configuration act\ GigabitEthernet0/0/0/1 > '/home/output.txt' 
+```
+In this case output in console is empty but content of output.txt file could look like this:
+```text Redirection output
+{
+  "active": "act",
+  "interface-name": "GigabitEthernet0/0/0/1",
+  "shutdown": [
+    null
+  ]
+}
+```
 
 ## Aliases
