@@ -1006,6 +1006,160 @@ curl --location --request PUT 'http://localhost:8181/rests/data/network-topology
 ```
 
 
+## Retrieving data
+
+### With-defaults query parameter
+
+The 'with-defaults' query parameter is used to specify how information about default data nodes is returned
+in response to **GET** requests on data resources. The response body is output filtered by value of with-defaults
+parameter.
+
+!!!
+The example of using the with-defaults query parameter: **path?with-defaults** or **path?with-defaults=value**
+!!!
+
+The allowed values for 'with-defaults' query parameter:
+
+| Value  | Description |
+| --- | --- |
+| | Using with-defaults without value is equivalent to value 'report-all'.
+| report-all | All data nodes are reported, including any data nodes with YANG default in scheme, which are not set by client are reported. |
+| explicit | Data nodes set to its YANG schema default value by the client are reported. |
+| trim | Data nodes set to its YANG schema default value are not reported. |
+
+Example YANG Module:
+
+    module example {
+
+    namespace "http://example.com/ns/interfaces";
+
+    prefix exam;
+
+    container interfaces {
+        
+        list interface {
+            key name;
+
+            leaf name {
+                type string;
+            }
+
+            leaf mtu {
+                type uint32;
+                default 1000;
+            }
+
+            leaf status {
+                type string;
+            }
+        }
+    }
+
+Example Data Set By User:
+
+    {
+        "interfaces": {
+            "interface": [
+                {
+                    "name": "eth0",
+                    "mtu": 1000,
+                    "status": "up"
+                },
+                {
+                    "name": "eth1",
+                    "mtu": 2000,
+                },
+                {
+                    "name": "eth2",
+                    "status": "down"                   
+                },
+            ]
+        }
+    }
+
+Value Report-All or Without Value
+```bash Example GET Request
+http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?with-defaults
+OR
+http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?with-defaults=report-all
+```
+
+``` bash Response
+    {
+        "interfaces": {
+            "interface": [
+                {
+                    "name": "eth0",
+                    "mtu": 1000,
+                    "status": "up"
+                },
+                {
+                    "name": "eth1",
+                    "mtu": 2000,
+                },
+                {
+                    "name": "eth2",
+                    "mtu": "1000",
+                    "status": "up"                   
+                },
+            ]
+        }
+    }
+```
+
+Value Explicit
+```bash Example GET Request
+http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?with-defaults=explicit
+```
+
+```bash Reponse
+    {
+        "interfaces": {
+            "interface": [
+                {
+                    "name": "eth0",
+                    "mtu": 1000,
+                    "status": "up"
+                },
+                {
+                    "name": "eth1",
+                    "mtu": 2000,
+                },
+                {
+                    "name": "eth2",
+                    "status": "up"                   
+                },
+            ]
+        }
+    }
+```
+
+Value Trim
+```bash GET Request
+http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?with-defaults=trim
+```
+
+```bash Reponse
+    {
+        "interfaces": {
+            "interface": [
+                {
+                    "name": "eth0",
+                    "status": "up"
+                },
+                {
+                    "name": "eth1",
+                    "mtu": 2000,
+                },
+                {
+                    "name": "eth2",
+                    "status": "up"                   
+                },
+            ]
+        }
+    }
+```
+
 ## JSON Attributes
 
 Node attributes can be encoded in JSON by wrapping all the attributes in

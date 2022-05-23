@@ -471,7 +471,9 @@ aliases
 lbr      (alias for 'logging-status broker restconf')
 ```
 
+
 * After opening Show mode, a new UniConfig transaction is open. Transaction is closed after leaving this mode.
+
 
 ```shell Opening Show operational mode
 uniconfig>show

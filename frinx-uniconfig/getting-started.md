@@ -96,11 +96,11 @@ Enter the following commands to download, activate and start UniConfig
 in a Docker container:
 
 ```
-docker pull frinx/uniconfig:5.0.6
+docker pull frinx/uniconfig:5.0.7
 docker pull postgres:12.2
 TOKEN=[frinx-license_secret-token]
 docker run -it -d --hostname postgres --name postgres -p 26257:5432 -e POSTGRES_PASSWORD=unipass -e POSTGRES_USER=uniremote -e POSTGRES_DB=uniconfig postgres:12.2
-docker run -it --hostname uniconfig --name uniconfig -p 8181:8181 --network host frinx/uniconfig:5.0.6 -l $token
+docker run -it --hostname uniconfig --name uniconfig -p 8181:8181 --network host frinx/uniconfig:5.0.7 -l $token
 ```
 
 !!!
@@ -122,7 +122,7 @@ docker stop uniconfig
 
 Click on the link to download a zip archive of the latest FRINX
 UniConfig:\
-[uniconfig-5.0.6.zip](https://license.frinx.io/download/uniconfig-5.0.6.zip)\
+[uniconfig-5.0.7.zip](https://license.frinx.io/download/uniconfig-5.0.7.zip)\
 By downloading the file you accept the FRINX software agreement:
 [EULA](https://frinx.io/eula)
 

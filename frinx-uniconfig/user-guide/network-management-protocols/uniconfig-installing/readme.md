@@ -522,6 +522,8 @@ Other non-mandatory parameters that can be added to mount-request.
     Configuration will be automatically reverted by device if the
     "confirming-commit" is not issued within the timeout period. This
     parameter has effect only on NETCONF nodes.
+- **netconf-node-topology:concurrent-rpc-limit** - Defines maximum number 
+    of concurrent RPCs, where 0 indicates no limit (it is default value).
 
 !!!danger
 There are additional install parameters in our OpenAPI, they can all

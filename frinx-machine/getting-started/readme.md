@@ -19,6 +19,10 @@ For installation, please refer to: [FRINX Machine
 repository](https://github.com/FRINXio/FRINX-machine)
 !!!
 
+!!!
+FRINX-machine can be installed in Kubernetes using the [Helm chart](https://artifacthub.io/packages/helm/frinx-helm-charts/frinx-machine)
+!!!
+
 ## FRINX Machine components
 
 ### FRINX UniConfig
