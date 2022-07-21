@@ -594,11 +594,19 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }'
 ```
 
-## Installation of device without mounpoint creation
+## Installation of device without syncing configuration
 It is possible to install device partially. In this case installation request data are saved to database
 and device installation can be later completed using sync-from-notwork RPC.
 
-The only difference in installation is create-mountpoint parameter. It is true by default.
+There are two parameters related to this feature. First is sync-node, it is true by default.
+When set to false installation will be without configuration sync. In this case second parameter 
+can be used also. It is called autosync and when it is set to true UniConfig will try to sync configuration
+immediately after device installation.
+
+When device is unreachable, configuration can be synced later using sync-from-network rpc
+or using any RESTCONF request on unsynced device. In second case UniConfig tries to
+automatically sync configuration before executing RESTCONF request.
+
 - Example:
 ```bash
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-node' \
@@ -607,7 +615,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 --data-raw '{
         "input":{
             "node-id":"xr1",
-            "create-mountpoint":"false",
+            "sync-node":"false",
+            "autosync":"true",
             "netconf":{
                 "netconf-node-topology:host":"10.0.0.1",
                 "netconf-node-topology:port":830,
